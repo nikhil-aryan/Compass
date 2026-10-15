@@ -105,6 +105,11 @@
       --logo-end: var(--white);
     }
   }
+
+  /* Anton: toggle button and message */
+  .anton { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  button.btn-purple { border: none; cursor: pointer; }
+  .anton-message { margin: 0; padding: 16px 24px; border: 1px solid var(--field-border); border-radius: 16px; font-size: 18px; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -121,5 +126,21 @@
   </div>
 
   <a class="btn-purple" href="kat.html">Kat</a>
+
+  <div class="anton">
+    <button type="button" class="btn-purple" id="anton-btn" aria-expanded="false" aria-controls="anton-message">Anton</button>
+    <p id="anton-message" class="anton-message" role="status" hidden>Hello World - Anton</p>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("anton-btn");
+      var msg = document.getElementById("anton-message");
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        msg.hidden = open;
+        btn.setAttribute("aria-expanded", String(!open));
+      });
+    })();
+  </script>
 </body>
 </html>
