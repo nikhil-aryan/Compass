@@ -1,0 +1,129 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Buttons.dc.html": {
+      "h": 860,
+      "title": "App \u2014 Buttons",
+      "w": 1100,
+      "x": 2080,
+      "y": 2100
+    },
+    "Colours.dc.html": {
+      "h": 760,
+      "title": "Colour palette",
+      "w": 1200,
+      "x": 1280,
+      "y": 0
+    },
+    "Home.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "title": "App \u2014 Home screen",
+      "w": 1440,
+      "x": 0,
+      "y": 2100
+    },
+    "LogoCompass.dc.html": {
+      "h": 760,
+      "title": "Compass logo",
+      "w": 1200,
+      "x": 2560,
+      "y": 880
+    },
+    "LogoUsage.dc.html": {
+      "h": 760,
+      "title": "Logo versions",
+      "w": 1200,
+      "x": 1280,
+      "y": 880
+    },
+    "Main.dc.html": {
+      "h": 760,
+      "title": "Primary logo",
+      "w": 1200,
+      "x": 0,
+      "y": 0
+    },
+    "ProfileCard.dc.html": {
+      "h": 760,
+      "title": "App \u2014 Profile card",
+      "w": 480,
+      "x": 1520,
+      "y": 2100
+    },
+    "Typography.dc.html": {
+      "h": 760,
+      "title": "Typography",
+      "w": 1200,
+      "x": 0,
+      "y": 880
+    },
+    "HomeStarter.dc.html": {
+      "expand": "fill",
+      "h": 900,
+      "w": 1440,
+      "x": 0,
+      "y": 3120,
+      "title": "App \u2014 Starter homepage",
+      "is_interactive": true
+    },
+    "KatPage.dc.html": {
+      "x": 1520,
+      "y": 3120,
+      "w": 1440,
+      "h": 900,
+      "title": "App \u2014 Kat page",
+      "expand": "fill"
+    },
+    "NikhilPage.dc.html": {
+      "x": 3040,
+      "y": 3120,
+      "w": 1440,
+      "h": 900,
+      "title": "App \u2014 Nikhil page",
+      "expand": "fill"
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-13T12:40:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "appTitle": {
+      "kind": "title1",
+      "maxW": 3180,
+      "text": "Compass app \u2014 Components (draft)",
+      "w": 240,
+      "x": 0,
+      "y": 1840
+    },
+    "brandTitle": {
+      "kind": "title1",
+      "maxW": 3760,
+      "text": "Compass \u2014 Brand identity",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Colours.dc.html",
+    "Typography.dc.html",
+    "LogoUsage.dc.html",
+    "LogoCompass.dc.html",
+    "Home.dc.html",
+    "ProfileCard.dc.html",
+    "Buttons.dc.html",
+    "HomeStarter.dc.html",
+    "KatPage.dc.html",
+    "NikhilPage.dc.html"
+  ],
+  "pages": [],
+  "title": "Compass"
+}
