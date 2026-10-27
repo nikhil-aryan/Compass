@@ -83,6 +83,30 @@
       "h": 900,
       "title": "App \u2014 Nikhil page",
       "expand": "fill"
+    },
+    "AntonPage.dc.html": {
+      "x": 4560,
+      "y": 3120,
+      "w": 1440,
+      "h": 900,
+      "title": "App \u2014 Anton page",
+      "expand": "fill"
+    },
+    "MatteoPage.dc.html": {
+      "x": 6080,
+      "y": 3120,
+      "w": 1440,
+      "h": 900,
+      "title": "App \u2014 Matteo page",
+      "expand": "fill"
+    },
+    "MateoPage.dc.html": {
+      "x": 7600,
+      "y": 3120,
+      "w": 1440,
+      "h": 900,
+      "title": "App \u2014 Mateo page",
+      "expand": "fill"
     }
   },
   "createdOnFiles": {
@@ -122,7 +146,10 @@
     "Buttons.dc.html",
     "HomeStarter.dc.html",
     "KatPage.dc.html",
-    "NikhilPage.dc.html"
+    "NikhilPage.dc.html",
+    "AntonPage.dc.html",
+    "MatteoPage.dc.html",
+    "MateoPage.dc.html"
   ],
   "pages": [],
   "title": "Compass"
