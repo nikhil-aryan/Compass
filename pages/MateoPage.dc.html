@@ -12,9 +12,16 @@
 <style>
 body{margin:0}
 a{color:#2974cd}a:hover{color:#6d2cbf}
+.cmp-close{color:#303030;transition:background-color 150ms ease}
+.cmp-close:hover{color:#303030;background:#f2f2f2}
+.cmp-close:focus-visible{outline:2px solid #2974cd;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.cmp-close{transition:none}}
 </style>
 </helmet>
 <main style="min-height: 100vh; box-sizing: border-box; padding: 48px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; background: #ffffff; color: #303030; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif">
+<a href="HomeStarter.dc.html" class="cmp-close" aria-label="Close and return to the homepage" style="position: fixed; top: 16px; right: 16px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</a>
 <img src="../assets/compass-logo-with-compass.svg" alt="Compass Logo" style="width: 100%; max-width: 440px; height: auto; display: block">
 <h1 style="margin: 0; font-family: 'Poppins', 'Open Sans', Helvetica, sans-serif; font-size: 32px; line-height: 40px; font-weight: 600; color: #303030; text-align: center">Hello, World! - Mateo</h1>
 </main>
