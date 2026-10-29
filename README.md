@@ -51,4 +51,8 @@ The concept, epics and feature list are drafted, and MVP scope is proposed. Up n
 
 ## Team
 
-_To be added._
+Ekaterina Kuvanova
+Nikhil Aryan
+Anton
+Matteo
+Mateo
