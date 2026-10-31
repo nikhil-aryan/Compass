@@ -93,6 +93,8 @@
     .sidebar ul { flex-direction: row; flex-wrap: wrap; }
     main { padding: 20px 16px 40px; }
     .doc { flex-wrap: wrap; }
+    .doc .txt { flex: 1 1 180px; }
+    .doc .btn-link { width: 100%; justify-content: center; }
     .card { max-width: none; }
   }
 </style>
@@ -104,7 +106,7 @@
       <p class="label">MENU</p>
       <ul>
         <li><a href="HomeStarter.dc.html" aria-current="page">Home</a></li>
-        <li><a href="#">People</a></li>
+        <li><a href="people.html">People</a></li>
         <li><a href="#">Saved</a></li>
       </ul>
     </div>
@@ -194,7 +196,7 @@
     icon.appendChild(svg("M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5", "#6d2cbf"));
     var txt = el("div", "txt");
     if (pt && pt.fileUrl) {
-      txt.appendChild(el("p", "kicker", "Try this first · " + (pt.name || "Knowledge base")));
+      txt.appendChild(el("p", "kicker", "Try this first"));
       txt.appendChild(el("p", "name", pt.fileName || "Related document"));
       wrap.appendChild(icon); wrap.appendChild(txt);
       var a = el("a", "btn-link", "Open document");

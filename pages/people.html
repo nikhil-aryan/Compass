@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compass – People</title>
+<!-- COM-55 People directory. Data: GET /api/people (api/people.js). Design: Claude Design "App - People". -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --blue: #2974cd; --purple: #6d2cbf; --text: #303030; --muted: #6e6e6e;
+    --line: #e6e6e6; --lilac: #ede6f7; --sky: #e3edf9; --head: #f3f3f3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--text); font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif; }
+  a { color: var(--blue); } a:hover { color: var(--purple); }
+  :focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; border-radius: 6px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar { width: 248px; flex-shrink: 0; border-right: 1px solid var(--line); padding: 32px 16px; display: flex; flex-direction: column; justify-content: space-between; }
+  .sidebar .label { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--muted); margin: 0 12px 12px; }
+  .sidebar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .sidebar a { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 10px; color: var(--text); text-decoration: none; font-size: 15px; }
+  .sidebar a[aria-current="page"] { background: var(--sky); }
+  .sidebar a:hover { background: #f3f0f8; color: var(--text); }
+
+  main { flex: 1; min-width: 0; padding: 28px 32px 48px; display: flex; flex-direction: column; gap: 24px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  h1 { margin: 0; font-family: 'Poppins', 'Open Sans', sans-serif; font-size: 28px; line-height: 36px; font-weight: 600; }
+  .sub { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+  .filter { width: 360px; max-width: 100%; height: 50px; padding: 0 18px; border: 1px solid #303030; border-radius: 14px; font: inherit; font-size: 15px; color: var(--text); }
+
+  .table-wrap { border: 1px solid var(--line); border-radius: 16px; overflow-x: auto; }
+  table { width: 100%; min-width: 960px; border-collapse: collapse; font-size: 14px; table-layout: fixed; }
+  col.c-name { width: 19%; } col.c-role { width: 15%; } col.c-city { width: 9%; } col.c-mail { width: 18%; } col.c-exp { width: 23%; } col.c-proj { width: 16%; }
+  thead th { background: var(--head); text-align: left; padding: 14px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  tbody td { padding: 12px 16px; border-top: 1px solid var(--line); vertical-align: middle; }
+  tbody tr:nth-child(even) td { background: #fafafa; }
+  .who { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+  .avatar { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; background: var(--lilac); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--purple); display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; color: var(--purple); }
+  .role { color: var(--purple); font-weight: 600; }
+  .city, .exp { color: var(--muted); }
+  .exp p { margin: 0 0 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  td a { font-size: 13px; overflow-wrap: anywhere; }
+  .chips { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { padding: 3px 10px; border-radius: 8px; background: var(--sky); font-size: 13px; font-weight: 600; color: var(--text); }
+  .chips.skills li { white-space: nowrap; padding: 1px 8px; background: #fff; border: 1px solid #e2d5f2; color: var(--purple); font-size: 12px; }
+  .msg { padding: 16px 20px; border-radius: 12px; background: #fff6e5; border: 1px solid #f0d9a8; font-size: 14px; }
+
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 12px 16px; }
+    .sidebar .label, .sidebar .settings { display: none; }
+    .sidebar ul { flex-direction: row; flex-wrap: wrap; }
+    main { padding: 20px 16px 40px; }
+    .filter { width: 100%; }
+    /* rows become cards on small screens */
+    .table-wrap { border: none; border-radius: 0; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    table, tbody, tr, td { display: block; width: 100%; }
+    tbody tr { border: 1px solid var(--line); border-radius: 14px; padding: 8px 4px; margin-bottom: 12px; }
+    tbody td { border: none; padding: 6px 12px; background: none !important; }
+    td[data-label]:not(.first)::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .exp p { -webkit-line-clamp: unset; display: block; }
+    table { min-width: 0; table-layout: auto; }
+    colgroup { display: none; }
+    .table-wrap { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar" aria-label="Main">
+    <div>
+      <p class="label">MENU</p>
+      <ul>
+        <li><a href="HomeStarter.dc.html">Home</a></li>
+        <li><a href="people.html" aria-current="page">People</a></li>
+        <li><a href="#">Saved</a></li>
+      </ul>
+    </div>
+    <ul class="settings"><li><a href="#">Settings</a></li></ul>
+  </nav>
+
+  <main>
+    <div class="head">
+      <div>
+        <h1>People</h1>
+        <p class="sub" id="count" aria-live="polite">Everyone in the organisation</p>
+      </div>
+      <label for="filter" class="sr-only">Filter people</label>
+      <input id="filter" class="filter" type="search" placeholder="Filter by name, role, city, project or skill" autocomplete="off">
+    </div>
+
+    <div id="content"><p>Loading people…</p></div>
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var all = [];
+  var content = document.getElementById("content");
+  var count = document.getElementById("count");
+  var filter = document.getElementById("filter");
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text; // textContent = no HTML injection
+    return e;
+  }
+  function initials(name) {
+    return (name || "?").split(/\s+/).map(function (w) { return w[0]; }).slice(0, 2).join("").toUpperCase();
+  }
+  function chips(items, cls, label) {
+    var ul = el("ul", "chips" + (cls ? " " + cls : ""));
+    ul.setAttribute("aria-label", label);
+    (items || []).forEach(function (t) { ul.appendChild(el("li", null, t)); });
+    return ul;
+  }
+  function cell(label, cls) {
+    var td = el("td", cls); td.setAttribute("data-label", label); return td;
+  }
+  function haystack(p) {
+    return [p.full_name, p.job_role, p.city, p.email, p.expertise]
+      .concat(p.projects || [], p.skills || []).join(" ").toLowerCase();
+  }
+
+  function render(list) {
+    content.textContent = "";
+    count.textContent = "Everyone in the organisation · " + list.length + (list.length === 1 ? " profile" : " profiles");
+    if (!list.length) {
+      content.appendChild(el("p", "msg", "Nobody matches this filter."));
+      return;
+    }
+    var wrap = el("div", "table-wrap");
+    var table = el("table");
+    var cap = el("caption", "sr-only", "Employees with role, city, email, expertise and projects");
+    table.appendChild(cap);
+    var cg = el("colgroup");
+    ["c-name", "c-role", "c-city", "c-mail", "c-exp", "c-proj"].forEach(function (c) { cg.appendChild(el("col", c)); });
+    table.appendChild(cg);
+    var thead = el("thead"), hr = el("tr");
+    ["Name", "Job role", "City", "Email", "Expertise", "Projects"].forEach(function (h) {
+      var th = el("th", null, h); th.scope = "col"; hr.appendChild(th);
+    });
+    thead.appendChild(hr); table.appendChild(thead);
+    var tbody = el("tbody");
+    list.forEach(function (p) {
+      var tr = el("tr");
+      var n = cell("Name", "first");
+      var who = el("div", "who");
+      var av = el("span", "avatar", initials(p.full_name)); av.setAttribute("aria-hidden", "true");
+      who.appendChild(av); who.appendChild(el("span", null, p.full_name));
+      n.appendChild(who); tr.appendChild(n);
+
+      var r = cell("Job role", "role"); r.textContent = p.job_role || ""; tr.appendChild(r);
+      var c = cell("City", "city"); c.textContent = p.city || ""; tr.appendChild(c);
+
+      var m = cell("Email");
+      if (p.email) { var a = el("a", null, p.email); a.href = "mailto:" + p.email; m.appendChild(a); }
+      tr.appendChild(m);
+
+      var x = cell("Expertise", "exp");
+      var xp = el("p", null, p.expertise || ""); xp.title = p.expertise || ""; x.appendChild(xp);
+      if (p.skills && p.skills.length) x.appendChild(chips(p.skills, "skills", "Skills"));
+      tr.appendChild(x);
+
+      var pr = cell("Projects");
+      pr.appendChild(chips(p.projects, null, "Projects"));
+      tr.appendChild(pr);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    content.appendChild(wrap);
+  }
+
+  filter.addEventListener("input", function () {
+    var q = filter.value.trim().toLowerCase();
+    render(q ? all.filter(function (p) { return haystack(p).indexOf(q) !== -1; }) : all);
+  });
+
+  fetch("/api/people")
+    .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+    .then(function (rows) { all = Array.isArray(rows) ? rows : []; render(all); })
+    .catch(function () {
+      content.textContent = "";
+      count.textContent = "Everyone in the organisation";
+      content.appendChild(el("p", "msg", "The people list can't be loaded right now. Please try again in a moment."));
+    });
+})();
+</script>
+</body>
+</html>
