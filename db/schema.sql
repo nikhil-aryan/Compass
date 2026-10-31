@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS availability_slots (
 -- Projects shown on the result card (design: "App - Search results")
 ALTER TABLE employees ADD COLUMN IF NOT EXISTS projects TEXT[];
 
--- Problem-type catalogue (COM-17, DRAFT until Mateo confirms)
+-- Problem-type catalogue (COM-17, final by Mateo 31 Oct 2026)
 -- file_url / file_name = the document shown on the result card (COM-33)
 CREATE TABLE IF NOT EXISTS problem_types (
   id          SERIAL PRIMARY KEY,
@@ -46,6 +46,9 @@ CREATE TABLE IF NOT EXISTS problem_types (
   file_url    TEXT,
   file_name   TEXT
 );
+
+-- Search keywords per problem type (COM-17 / COM-29, used to map free text to a type)
+ALTER TABLE problem_types ADD COLUMN IF NOT EXISTS keywords TEXT[];
 
 -- Which skills solve which problem type (used by matching, COM-19)
 CREATE TABLE IF NOT EXISTS problem_type_skills (
