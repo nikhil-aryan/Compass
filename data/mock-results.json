@@ -47,6 +47,32 @@
       "skillTags": ["workshop-facilitation", "change-management", "pricing"],
       "reason": "Has pricing experience, but no free slot before your deadline.",
       "slots": []
+    },
+    {
+      "expertId": 22,
+      "rank": 4,
+      "matchPercent": 45,
+      "name": "Sebastian Vogel",
+      "role": "Data Strategy Manager",
+      "city": "Frankfurt",
+      "expertise": "Builds business cases and TCO models for data platform moves. Bridges finance and engineering teams.",
+      "projects": ["Core banking data migration", "Cloud TCO assessment"],
+      "skillTags": ["financial-modelling", "data-engineering", "cloud-aws"],
+      "reason": "Has 1 of 2 skills this needs (financial-modelling); free Wed 4 Nov, 10:00.",
+      "slots": ["2026-11-04T10:00:00+01:00", "2026-11-06T09:30:00+01:00"]
+    },
+    {
+      "expertId": 21,
+      "rank": 5,
+      "matchPercent": 38,
+      "name": "Nadia Haddad",
+      "role": "Analyst, Finance & Data",
+      "city": "Madrid",
+      "expertise": "Junior analyst who supports models and reporting. Fast with Excel and SQL.",
+      "projects": ["Retail business case", "Sales KPI dashboard"],
+      "skillTags": ["financial-modelling", "excel", "sql"],
+      "reason": "Has 1 of 2 skills this needs (financial-modelling); free Wed 4 Nov, 10:00.",
+      "slots": ["2026-11-04T10:00:00+01:00", "2026-11-06T09:30:00+01:00"]
     }
   ]
 }

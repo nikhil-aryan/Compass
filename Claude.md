@@ -52,3 +52,17 @@ Pages must never talk to the database directly. Only functions in `api/` read
 ## Current endpoints
 
 - `GET /api/employees` returns id, full_name, job_role, city, expertise.
+- `GET /api/people` returns profiles with projects and skills (People page).
+- `GET /api/match?q=...` returns the problem type and ranked experts for a search
+  (Home page). Shape and ranking: `docs/data-contract.md`.
+
+## Matching and tagging
+
+- Search queries are classified by a small embedding model that runs inside
+  `api/match.js` (no paid or external AI API).
+- Matching uses the existing schema only. The team can't change the database
+  schema, so don't add tables or columns.
+- Past experience is scored live in `api/match.js` by comparing the query with
+  each person's expertise and projects.
+- `scripts/tag-profiles.js` can suggest skills for new profiles with a local LLM
+  (Ollama). It writes to the existing `employee_skills` table.
