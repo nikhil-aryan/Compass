@@ -1,3 +1,6 @@
 node_modules
 .env
 .env.*
+
+# Retired pages (kept locally, not deployed)
+retired/

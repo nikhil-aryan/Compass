@@ -58,55 +58,6 @@
       "w": 1200,
       "x": 0,
       "y": 880
-    },
-    "HomeStarter.dc.html": {
-      "expand": "fill",
-      "h": 900,
-      "w": 1440,
-      "x": 0,
-      "y": 3120,
-      "title": "App \u2014 Starter homepage",
-      "is_interactive": true
-    },
-    "KatPage.dc.html": {
-      "x": 1520,
-      "y": 3120,
-      "w": 1440,
-      "h": 900,
-      "title": "App \u2014 Kat page",
-      "expand": "fill"
-    },
-    "NikhilPage.dc.html": {
-      "x": 3040,
-      "y": 3120,
-      "w": 1440,
-      "h": 900,
-      "title": "App \u2014 Nikhil page",
-      "expand": "fill"
-    },
-    "AntonPage.dc.html": {
-      "x": 4560,
-      "y": 3120,
-      "w": 1440,
-      "h": 900,
-      "title": "App \u2014 Anton page",
-      "expand": "fill"
-    },
-    "MatteoPage.dc.html": {
-      "x": 6080,
-      "y": 3120,
-      "w": 1440,
-      "h": 900,
-      "title": "App \u2014 Matteo page",
-      "expand": "fill"
-    },
-    "MateoPage.dc.html": {
-      "x": 7600,
-      "y": 3120,
-      "w": 1440,
-      "h": 900,
-      "title": "App \u2014 Mateo page",
-      "expand": "fill"
     }
   },
   "createdOnFiles": {
@@ -143,13 +94,7 @@
     "LogoCompass.dc.html",
     "Home.dc.html",
     "ProfileCard.dc.html",
-    "Buttons.dc.html",
-    "HomeStarter.dc.html",
-    "KatPage.dc.html",
-    "NikhilPage.dc.html",
-    "AntonPage.dc.html",
-    "MatteoPage.dc.html",
-    "MateoPage.dc.html"
+    "Buttons.dc.html"
   ],
   "pages": [],
   "title": "Compass"

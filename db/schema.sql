@@ -56,22 +56,3 @@ CREATE TABLE IF NOT EXISTS problem_type_skills (
   skill_id        INT REFERENCES skills(id) ON DELETE CASCADE,
   PRIMARY KEY (problem_type_id, skill_id)
 );
-
--- ---------------------------------------------------------------
--- Added for COM-19 matching. Run in the Neon SQL Editor.
--- Safe to run more than once.
--- ---------------------------------------------------------------
-
--- Problem types a person has handled before. Filled by the local LLM
--- (scripts/tag-profiles.js) from their expertise and projects, not by hand.
-CREATE TABLE IF NOT EXISTS employee_problem_types (
-  employee_id     INT REFERENCES employees(id) ON DELETE CASCADE,
-  problem_type_id INT REFERENCES problem_types(id) ON DELETE CASCADE,
-  confidence      REAL NOT NULL,   -- 0-1, how sure the LLM is
-  evidence        TEXT,            -- project or phrase that shows it
-  PRIMARY KEY (employee_id, problem_type_id)
-);
-
--- Slot length, so matching can require at least 2 hours free.
--- Stays fake until calendar integration exists.
-ALTER TABLE availability_slots ADD COLUMN IF NOT EXISTS ends_at TIMESTAMPTZ;

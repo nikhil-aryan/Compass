@@ -51,9 +51,77 @@ INSERT INTO employees (full_name, job_role, city, email, expertise, projects) VA
   ('Pavel Novak', 'Incident Response Lead', 'Prague', 'pavel.novak@compass-demo.test', 'Coordinates the response to data breaches: root cause, notification duties and clean-up.', ARRAY['Retail data breach response','Incident playbook rollout'])
 ON CONFLICT (email) DO NOTHING;
 
--- 3. Employee skills and past problem types are NOT set by hand any more.
---    Run scripts/tag-profiles.js (local LLM) after this file, or run the
---    snapshot it writes, db/profile-tags.sql.
+-- 3. Employee skills
+INSERT INTO employee_skills (employee_id, skill_id)
+SELECT e.id, s.id
+FROM (VALUES
+  ('lena.hartmann@compass-demo.test', 'pricing'),
+  ('lena.hartmann@compass-demo.test', 'financial-modelling'),
+  ('lena.hartmann@compass-demo.test', 'excel'),
+  ('diego.navarro@compass-demo.test', 'financial-modelling'),
+  ('diego.navarro@compass-demo.test', 'excel'),
+  ('diego.navarro@compass-demo.test', 'pricing'),
+  ('priya.raman@compass-demo.test', 'sql'),
+  ('priya.raman@compass-demo.test', 'data-engineering'),
+  ('priya.raman@compass-demo.test', 'cloud-aws'),
+  ('tomasz.kowalski@compass-demo.test', 'sql'),
+  ('tomasz.kowalski@compass-demo.test', 'data-engineering'),
+  ('tomasz.kowalski@compass-demo.test', 'power-bi'),
+  ('aisha.okafor@compass-demo.test', 'cloud-aws'),
+  ('aisha.okafor@compass-demo.test', 'devops'),
+  ('aisha.okafor@compass-demo.test', 'gdpr'),
+  ('marco.bellini@compass-demo.test', 'devops'),
+  ('marco.bellini@compass-demo.test', 'cloud-aws'),
+  ('marco.bellini@compass-demo.test', 'agile-scrum'),
+  ('sofia.lindqvist@compass-demo.test', 'workshop-facilitation'),
+  ('sofia.lindqvist@compass-demo.test', 'change-management'),
+  ('sofia.lindqvist@compass-demo.test', 'agile-scrum'),
+  ('julien.moreau@compass-demo.test', 'workshop-facilitation'),
+  ('julien.moreau@compass-demo.test', 'change-management'),
+  ('julien.moreau@compass-demo.test', 'pricing'),
+  ('clara.becker@compass-demo.test', 'gdpr'),
+  ('clara.becker@compass-demo.test', 'legal-compliance'),
+  ('clara.becker@compass-demo.test', 'change-management'),
+  ('rui.fernandes@compass-demo.test', 'legal-compliance'),
+  ('rui.fernandes@compass-demo.test', 'gdpr'),
+  ('rui.fernandes@compass-demo.test', 'excel'),
+  ('hannah.schulz@compass-demo.test', 'power-bi'),
+  ('hannah.schulz@compass-demo.test', 'data-visualisation'),
+  ('hannah.schulz@compass-demo.test', 'sql'),
+  ('kenji.watanabe@compass-demo.test', 'data-visualisation'),
+  ('kenji.watanabe@compass-demo.test', 'power-bi'),
+  ('kenji.watanabe@compass-demo.test', 'excel'),
+  ('elena.popescu@compass-demo.test', 'agile-scrum'),
+  ('elena.popescu@compass-demo.test', 'jira'),
+  ('elena.popescu@compass-demo.test', 'workshop-facilitation'),
+  ('oliver.grant@compass-demo.test', 'jira'),
+  ('oliver.grant@compass-demo.test', 'agile-scrum'),
+  ('oliver.grant@compass-demo.test', 'devops'),
+  ('nadia.haddad@compass-demo.test', 'excel'),
+  ('nadia.haddad@compass-demo.test', 'sql'),
+  ('nadia.haddad@compass-demo.test', 'data-visualisation'),
+  ('sebastian.vogel@compass-demo.test', 'financial-modelling'),
+  ('sebastian.vogel@compass-demo.test', 'data-engineering'),
+  ('sebastian.vogel@compass-demo.test', 'cloud-aws'),
+  ('ines.carvalho@compass-demo.test', 'data-engineering'),
+  ('ines.carvalho@compass-demo.test', 'financial-modelling'),
+  ('ines.carvalho@compass-demo.test', 'sql'),
+  ('maya.cohen@compass-demo.test', 'financial-modelling'),
+  ('maya.cohen@compass-demo.test', 'data-visualisation'),
+  ('maya.cohen@compass-demo.test', 'change-management'),
+  ('lukas.brandt@compass-demo.test', 'financial-modelling'),
+  ('lukas.brandt@compass-demo.test', 'change-management'),
+  ('lukas.brandt@compass-demo.test', 'workshop-facilitation'),
+  ('amara.nwosu@compass-demo.test', 'data-engineering'),
+  ('amara.nwosu@compass-demo.test', 'gdpr'),
+  ('amara.nwosu@compass-demo.test', 'change-management'),
+  ('pavel.novak@compass-demo.test', 'data-engineering'),
+  ('pavel.novak@compass-demo.test', 'legal-compliance'),
+  ('pavel.novak@compass-demo.test', 'gdpr')
+) AS v(email, skill)
+JOIN employees e ON e.email = v.email
+JOIN skills s ON s.name = v.skill
+ON CONFLICT DO NOTHING;
 
 -- 4. Availability slots (fake, no calendar sync). Tomasz and Julien only have late slots -> 'no availability' state.
 INSERT INTO availability_slots (employee_id, starts_at)
@@ -106,9 +174,6 @@ JOIN employees e ON e.email = v.email
 WHERE NOT EXISTS (
   SELECT 1 FROM availability_slots a WHERE a.employee_id = e.id AND a.starts_at = v.starts_at
 );
-
--- Demo slots are 2 hours long (matching only counts slots of 2h or more)
-UPDATE availability_slots SET ends_at = starts_at + interval '2 hours' WHERE ends_at IS NULL;
 
 -- 5. Problem types removed from the final catalogue (COM-17)
 DELETE FROM problem_types WHERE slug IN ('workshop-facilitation', 'gdpr-privacy');
