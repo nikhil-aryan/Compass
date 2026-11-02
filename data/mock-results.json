@@ -1,0 +1,52 @@
+{
+  "query": "I need to price a fixed-fee proposal for a telco client by Friday",
+  "problemType": {
+    "id": 1,
+    "slug": "pricing-proposal",
+    "name": "Pricing a client proposal",
+    "fileUrl": "/docs/pricing-proposal.html",
+    "fileName": "Pricing a client proposal - checklist"
+  },
+  "state": "available",
+  "experts": [
+    {
+      "expertId": 7,
+      "rank": 1,
+      "matchPercent": 92,
+      "name": "Lena Hartmann",
+      "role": "Senior Consultant, Pricing",
+      "city": "Munich",
+      "expertise": "Builds pricing models for fixed-fee and outcome-based proposals. Known for turning messy scope into a defensible price.",
+      "projects": ["Telco pricing review", "Insurance bid 2026"],
+      "skillTags": ["pricing", "financial-modelling", "excel"],
+      "reason": "Has both pricing skills you need and worked on a telco pricing review.",
+      "slots": ["2026-11-03T09:00:00+01:00", "2026-11-04T16:00:00+01:00"]
+    },
+    {
+      "expertId": 8,
+      "rank": 2,
+      "matchPercent": 85,
+      "name": "Diego Navarro",
+      "role": "Manager, Corporate Finance",
+      "city": "Madrid",
+      "expertise": "Leads business-case and forecasting work for CFO clients. Reviews models for logic errors before they reach the client.",
+      "projects": ["Retail business case", "Energy forecast model"],
+      "skillTags": ["financial-modelling", "excel", "pricing"],
+      "reason": "Pricing and financial-modelling skills, free tomorrow afternoon.",
+      "slots": ["2026-11-03T15:00:00+01:00", "2026-11-05T11:00:00+01:00"]
+    },
+    {
+      "expertId": 14,
+      "rank": 3,
+      "matchPercent": 61,
+      "name": "Julien Moreau",
+      "role": "Senior Consultant, Strategy",
+      "city": "Paris",
+      "expertise": "Facilitates strategy and design-thinking workshops with executive teams.",
+      "projects": ["Growth strategy offsite", "Customer journey sprint"],
+      "skillTags": ["workshop-facilitation", "change-management", "pricing"],
+      "reason": "Has pricing experience, but no free slot before your deadline.",
+      "slots": []
+    }
+  ]
+}
