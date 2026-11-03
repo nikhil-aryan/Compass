@@ -305,6 +305,11 @@
   }
 
   // COM-35 + COM-36: one card per expert
+     // email lookup: /api/match has no email, /api/people does (same ids)
+  var emailsReady = fetch("/api/people")
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (rows) { var m = {}; rows.forEach(function (p) { m[p.id] = p.email; }); return m; })
+    .catch(function () { return {}; });
   function renderCard(x) {
     var card = el("article", "card");
     card.setAttribute("aria-labelledby", "name-" + x.expertId);
@@ -346,6 +351,11 @@
 
     // COM-47: Request meeting (demo only, see openRequest below)
     var hasSlots = !!(x.slots && x.slots.length);
+    var mail = el("a", "btn-link", "Email"); mail.hidden = true;
+    emailsReady.then(function (m) {
+      if (m[x.expertId]) { mail.href = "mailto:" + m[x.expertId]; mail.hidden = false; mail.setAttribute("aria-label", "Email " + x.name); }
+    });
+    card.appendChild(mail);
     var req = el("button", "req-btn" + (hasSlots ? "" : " later"), hasSlots ? "Request meeting" : "Request for later");
     req.type = "button";
     req.setAttribute("aria-label", (hasSlots ? "Request meeting with " : "Request for later with ") + x.name);
