@@ -156,7 +156,7 @@
       <ul>
         <li><a href="home.html" aria-current="page"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>Home</a></li>
         <li><a href="people.html"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"></circle><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path><path d="M16 4a4 4 0 0 1 0 8"></path><path d="M22 21c0-3-1.8-5.6-4.5-6.6"></path></svg>People</a></li>
-        <li><a href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>Saved</a></li>
+        <li><a href="saved.html"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>Saved</a></li>
       </ul>
     </div>
     <ul class="settings"><li class="settings-link"><a href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>Settings</a></li>
@@ -269,6 +269,16 @@
     });
   }
 
+  // COM-57: saved experts live in this browser only (no accounts yet). Read by saved.html.
+  var SAVED_KEY = "compass.saved";
+  function readSaved() {
+    try { var v = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"); return Array.isArray(v) ? v : []; }
+    catch (e) { return []; }
+  }
+  function writeSaved(ids) {
+    try { localStorage.setItem(SAVED_KEY, JSON.stringify(ids)); } catch (e) { /* storage blocked: ignore */ }
+  }
+
   // COM-37: document for the problem type (knowledge base first), with fallback
   function renderDoc(pt) {
     var box = document.getElementById("doc");
@@ -348,9 +358,18 @@
     up.appendChild(svg("M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3", "#2974cd"));
     var down = el("button", "icon-btn down"); down.type = "button"; down.setAttribute("aria-pressed", "false"); down.setAttribute("aria-label", "Wrong match: " + x.name);
     down.appendChild(svg("M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17", "#6d2cbf"));
-    var save = el("button", "icon-btn save"); save.type = "button"; save.setAttribute("aria-pressed", "false"); save.setAttribute("aria-label", "Save " + x.name);
+    var save = el("button", "icon-btn save"); save.type = "button"; save.setAttribute("aria-label", "Save " + x.name);
+    save.setAttribute("aria-pressed", String(readSaved().indexOf(x.expertId) !== -1)); // stays saved after a reload
+    save.title = "Save to your Saved tab";
     save.appendChild(svg("m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z", "#303030"));
-    [up, down, save].forEach(toggle);
+    [up, down].forEach(toggle);
+    save.addEventListener("click", function () {
+      var on = save.getAttribute("aria-pressed") !== "true";
+      save.setAttribute("aria-pressed", String(on));
+      var ids = readSaved().filter(function (id) { return id !== x.expertId; });
+      if (on) ids.push(x.expertId);
+      writeSaved(ids);
+    });
     up.addEventListener("click", function () { if (up.getAttribute("aria-pressed") === "true") down.setAttribute("aria-pressed", "false"); });
     down.addEventListener("click", function () { if (down.getAttribute("aria-pressed") === "true") up.setAttribute("aria-pressed", "false"); });
     fb.appendChild(up); fb.appendChild(down); fb.appendChild(save);
