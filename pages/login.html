@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compass – Sign in</title>
+<!-- Sign in and register. login.html shows sign in, login.html#register shows registration.
+     Front end only for now: there is no accounts API yet, so nothing is sent or stored.
+     Real accounts need a back end with hashed passwords and approval under IE's data
+     governance policy (GDPR) first, see CLAUDE.md rule 3. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@500;600;700&display=swap">
+<style>
+  :root {
+    --blue: #2974cd; --purple: #6d2cbf; --text: #303030; --muted: #6e6e6e;
+    --line: #e6e6e6; --lilac-line: #e2d5f2; --sky: #d4e3f5; --error: #b3261e;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: linear-gradient(135deg, #eef4fc, #f3edfb); color: var(--text); font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 16px; }
+  a { color: var(--blue); } a:hover { color: var(--purple); }
+  :focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; border-radius: 6px; }
+  [hidden] { display: none !important; }
+
+  .back { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  .logo { display: block; width: 220px; max-width: 70%; height: auto; margin: 24px 0 28px; }
+
+  .box { width: 100%; max-width: 440px; padding: 32px; border: 1px solid var(--lilac-line); border-radius: 16px; background: #fff; box-shadow: 0 6px 24px rgba(48,48,48,.08); }
+  .box h1 { margin: 0 0 6px; font-family: 'Poppins', 'Open Sans', sans-serif; font-size: 24px; line-height: 32px; font-weight: 600; }
+  .box h1:focus { outline: none; }
+  .box .sub { margin: 0 0 24px; font-size: 14px; color: var(--muted); }
+
+  form { display: flex; flex-direction: column; gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 14px; font-weight: 600; }
+  input { height: 44px; padding: 0 14px; border: 1px solid var(--muted); border-radius: 10px; font: inherit; font-size: 15px; color: var(--text); background: #fff; }
+  input:focus { outline: 3px solid var(--purple); outline-offset: 1px; border-color: var(--purple); }
+  input[aria-invalid="true"] { border-color: var(--error); }
+  .help { margin: 0; font-size: 13px; color: var(--muted); }
+  .error { margin: 0; font-size: 13px; font-weight: 600; color: var(--error); }
+
+  .btn { height: 44px; padding: 0 20px; border: none; border-radius: 10px; background: linear-gradient(90deg, var(--blue), var(--purple)); color: #fff; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 150ms ease; }
+  .btn:hover { transform: scale(1.02); }
+  .switch { margin: 20px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; text-align: center; }
+  .switch a { font-weight: 600; }
+  .status { padding: 12px 16px; border-radius: 10px; background: #fff6e5; border: 1px solid #f0d9a8; font-size: 14px; }
+
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+  @media (max-width: 480px) { .box { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+  <a class="back" href="home.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Back to Home</a>
+  <img class="logo" src="../assets/compass-logo.svg" alt="Compass">
+
+  <main class="box">
+    <!-- Sign in -->
+    <section id="signin" aria-labelledby="signin-title">
+      <h1 id="signin-title" tabindex="-1">Sign in</h1>
+      <p class="sub">Use your work email to find the right colleague faster.</p>
+      <form id="signin-form" method="post" novalidate>
+        <div class="field">
+          <label for="si-email">Email</label>
+          <input id="si-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="si-password">Password</label>
+          <input id="si-password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <p class="error" id="signin-error" role="alert" hidden></p>
+        <button class="btn" type="submit">Sign in</button>
+        <p class="status" id="signin-status" role="status" hidden></p>
+      </form>
+      <p class="switch">Don't have an account yet? <a href="#register">Register</a></p>
+    </section>
+
+    <!-- Register -->
+    <section id="register" aria-labelledby="register-title" hidden>
+      <h1 id="register-title" tabindex="-1">Create an account</h1>
+      <p class="sub">Type your email and password twice so we know they're right.</p>
+      <form id="register-form" method="post" novalidate>
+        <div class="field">
+          <label for="re-name">Full name</label>
+          <input id="re-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="re-email">Email</label>
+          <input id="re-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="re-email2">Confirm email</label>
+          <input id="re-email2" name="email2" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="re-password">Password</label>
+          <input id="re-password" name="password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="pw-help">
+          <p class="help" id="pw-help">At least 8 characters.</p>
+        </div>
+        <div class="field">
+          <label for="re-password2">Confirm password</label>
+          <input id="re-password2" name="password2" type="password" autocomplete="new-password" required>
+        </div>
+        <p class="error" id="register-error" role="alert" hidden></p>
+        <button class="btn" type="submit">Register</button>
+        <p class="status" id="register-status" role="status" hidden></p>
+      </form>
+      <p class="switch">Already have an account? <a href="#signin">Sign in</a></p>
+    </section>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+  var NOT_READY = "Accounts aren't switched on yet in this prototype, so nothing was sent or saved.";
+
+  // login.html#register shows registration, anything else shows sign in
+  function show() {
+    var reg = location.hash === "#register";
+    document.getElementById("register").hidden = !reg;
+    document.getElementById("signin").hidden = reg;
+    document.title = (reg ? "Create an account" : "Sign in") + " – Compass";
+    return reg;
+  }
+  show();
+  window.addEventListener("hashchange", function () {
+    var reg = show();
+    document.getElementById(reg ? "register-title" : "signin-title").focus();
+  });
+
+  function check(form, errorEl, extra) {
+    var fields = form.querySelectorAll("input"), msg = "", first = null;
+    fields.forEach(function (f) { f.removeAttribute("aria-invalid"); });
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i], label = form.querySelector('label[for="' + f.id + '"]').textContent;
+      if (!f.value.trim()) msg = label + " is required.";
+      else if (f.type === "email" && f.validity.typeMismatch) msg = "Enter a valid email address.";
+      else if (f.validity.tooShort) msg = "Password must be at least 8 characters.";
+      if (msg) { first = f; break; }
+    }
+    if (!msg && extra) { var e = extra(); if (e) { msg = e.msg; first = e.field; } }
+    errorEl.hidden = !msg;
+    errorEl.textContent = msg;
+    if (first) { first.setAttribute("aria-invalid", "true"); first.setAttribute("aria-errormessage", errorEl.id); first.focus(); }
+    return !msg;
+  }
+
+  function done(form, statusEl) {
+    statusEl.textContent = NOT_READY;
+    statusEl.hidden = false;
+    form.querySelectorAll('input[type="password"]').forEach(function (f) { f.value = ""; });
+  }
+
+  var si = document.getElementById("signin-form");
+  si.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (check(si, document.getElementById("signin-error"))) done(si, document.getElementById("signin-status"));
+  });
+
+  var re = document.getElementById("register-form");
+  re.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var ok = check(re, document.getElementById("register-error"), function () {
+      var e1 = document.getElementById("re-email"), e2 = document.getElementById("re-email2");
+      var p1 = document.getElementById("re-password"), p2 = document.getElementById("re-password2");
+      if (e1.value.trim().toLowerCase() !== e2.value.trim().toLowerCase()) return { msg: "The two email addresses don't match.", field: e2 };
+      if (p1.value !== p2.value) return { msg: "The two passwords don't match.", field: p2 };
+      return null;
+    });
+    if (ok) done(re, document.getElementById("register-status"));
+  });
+})();
+</script>
+</body>
+</html>
