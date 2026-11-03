@@ -101,12 +101,46 @@
   .slot-hint { font-size: 13px; font-weight: 600; color: var(--muted); text-align: right; }
   .slot-hint.free { color: #1e6b3a; }
 
+<<<<<<< HEAD
   #more { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
   .more-btn { background: #fff; border: 1px solid var(--lilac-line); color: var(--purple); }
   .notice { padding: 16px 20px; border-radius: 12px; background: #fff6e5; border: 1px solid #f0d9a8; font-size: 14px; }
   .source { margin: 0; font-size: 12px; color: var(--muted); }
 
   @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+=======
+  /* COM-47: Request meeting button and demo dialog */
+  .req-btn { width: 100%; height: 44px; border: 2px solid var(--purple); border-radius: 10px; background: var(--purple); color: #fff; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 150ms ease; }
+  .req-btn:hover { background: #5a22a0; border-color: #5a22a0; }
+  .req-btn.later { background: #fff; color: var(--purple); }
+  .req-btn.later:hover { background: var(--lilac); }
+  dialog#req-dialog { width: calc(100% - 32px); max-width: 480px; padding: 0; border: none; border-radius: 16px; color: var(--text); box-shadow: 0 16px 48px rgba(48,48,48,.25); }
+  dialog#req-dialog::backdrop { background: rgba(48,48,48,.45); }
+  .dlg-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .dlg-body h2 { margin: 0; font-family: 'Poppins', 'Open Sans', sans-serif; font-size: 20px; line-height: 28px; font-weight: 600; }
+  .dlg-body h2:focus { outline: none; }
+  .dlg-body p { margin: 0; font-size: 14px; line-height: 22px; }
+  .demo-note { padding: 12px 14px; border-radius: 10px; background: #fff6e5; border: 1px solid #f0d9a8; font-weight: 600; }
+  .dlg-body fieldset { margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 8px; }
+  .dlg-body legend { padding: 0; margin-bottom: 8px; font-size: 14px; font-weight: 700; }
+  .slot-opt { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 1px solid var(--lilac-line); border-radius: 10px; font-size: 15px; cursor: pointer; }
+  .slot-opt:has(input:checked) { background: var(--lilac); border-color: var(--purple); }
+  .slot-opt input { width: 18px; height: 18px; accent-color: var(--purple); }
+  .dlg-body label.field { font-size: 14px; font-weight: 700; display: flex; flex-direction: column; gap: 6px; }
+  .dlg-body textarea { font: inherit; font-weight: 400; font-size: 14px; min-height: 72px; padding: 10px 12px; border: 1px solid var(--muted); border-radius: 10px; resize: vertical; }
+  .dlg-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+  .dlg-actions .btn { padding: 0 22px; }
+  .dlg-actions .primary { background: var(--purple); color: #fff; }
+  .dlg-actions .primary:hover { background: #5a22a0; }
+  .dlg-actions .secondary { background: #fff; border: 1px solid var(--lilac-line); color: var(--purple); }
+
+  #more { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .more-btn { background: #fff; border: 1px solid var(--lilac-line); color: var(--purple); }
+  .notice { padding: 16px 20px; border-radius: 12px; background: #fff6e5; border: 1px solid #f0d9a8; font-size: 14px; }
+  .source { margin: 0; font-size: 12px; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { .btn, .req-btn { transition: none; } }
+>>>>>>> 573f3a2f75dbacebe22a304d04ddf5e5607c7e93
   @media (max-width: 760px) {
     .layout { flex-direction: column; }
     .sidebar { width: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 12px 16px; }
@@ -134,9 +168,13 @@
         <li><a href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>Saved</a></li>
       </ul>
     </div>
+<<<<<<< HEAD
     <ul class="settings"><li class="settings-link"><a href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>Settings</a></li>
       <li><a href="login.html" class="account"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="10" r="3"></circle><path d="M6.2 18.4a7 7 0 0 1 11.6 0"></path></svg><span>Sign in</span></a></li>
     </ul>
+=======
+    <ul class="settings"><li><a href="#"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>Settings</a></li></ul>
+>>>>>>> 573f3a2f75dbacebe22a304d04ddf5e5607c7e93
   </nav>
 
   <main>
@@ -179,6 +217,11 @@
     </div>
   </main>
 </div>
+
+<!-- COM-47: demo-only meeting request. Nothing is sent anywhere. -->
+<dialog id="req-dialog" aria-labelledby="req-title">
+  <div class="dlg-body" id="req-body"></div>
+</dialog>
 
 <script>
 (function () {
@@ -304,6 +347,14 @@
       card.appendChild(pr);
     }
 
+    // COM-47: Request meeting (demo only, see openRequest below)
+    var hasSlots = !!(x.slots && x.slots.length);
+    var req = el("button", "req-btn" + (hasSlots ? "" : " later"), hasSlots ? "Request meeting" : "Request for later");
+    req.type = "button";
+    req.setAttribute("aria-label", (hasSlots ? "Request meeting with " : "Request for later with ") + x.name);
+    req.addEventListener("click", function () { openRequest(x, req); });
+    card.appendChild(req);
+
     var foot = el("div", "card-foot");
     var fb = el("div", "fb"); fb.setAttribute("role", "group"); fb.setAttribute("aria-label", "Does this person match your problem?");
     var up = el("button", "icon-btn up"); up.type = "button"; up.setAttribute("aria-pressed", "false"); up.setAttribute("aria-label", "Good match: " + x.name);
@@ -318,7 +369,7 @@
     fb.appendChild(up); fb.appendChild(down); fb.appendChild(save);
     foot.appendChild(fb);
 
-    // Slot details + Request button are Matteo's COM-47; this only hints availability.
+    // Availability hint next to the feedback buttons; the Request button is above (COM-47).
     var hint = (x.slots && x.slots.length)
       ? el("span", "slot-hint free", "Free " + fmtSlot(x.slots[0]))
       : el("span", "slot-hint", "No free slot soon");
@@ -327,6 +378,75 @@
     return card;
   }
 
+<<<<<<< HEAD
+=======
+  // COM-47: Request meeting dialog. Demo only: no request, email, invitation or calendar call is made.
+  var dlg = document.getElementById("req-dialog");
+  var dlgBody = document.getElementById("req-body");
+  var lastTrigger = null;
+
+  function closeDialog() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+  dlg.addEventListener("close", function () { if (lastTrigger) lastTrigger.focus(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) closeDialog(); }); // click on backdrop
+
+  function openRequest(x, trigger) {
+    lastTrigger = trigger;
+    var slots = (x.slots || []).slice(0, 2);
+    dlgBody.textContent = "";
+
+    var title = el("h2", null, "Request a meeting with " + x.name);
+    title.id = "req-title";
+    dlgBody.appendChild(title);
+    dlgBody.appendChild(el("p", "demo-note", "Demo only: no request will be sent. No invitation or email is created and no calendar is used."));
+
+    var chosen = slots[0] || null;
+    if (slots.length) {
+      var fs = el("fieldset");
+      fs.appendChild(el("legend", null, "Choose a time"));
+      slots.forEach(function (iso, i) {
+        var lab = el("label", "slot-opt");
+        var r = el("input"); r.type = "radio"; r.name = "req-slot"; r.value = iso; r.checked = i === 0;
+        r.addEventListener("change", function () { chosen = iso; });
+        lab.appendChild(r); lab.appendChild(el("span", null, fmtSlot(iso)));
+        fs.appendChild(lab);
+      });
+      dlgBody.appendChild(fs);
+    } else {
+      dlgBody.appendChild(el("p", null, x.name + " has no free slot in the next two weeks. You can still request a meeting without a fixed time."));
+    }
+
+    var note = el("label", "field", "Note for " + x.name + " (optional)");
+    var ta = el("textarea"); ta.maxLength = 300; ta.rows = 3;
+    note.appendChild(ta);
+    dlgBody.appendChild(note);
+
+    var actions = el("div", "dlg-actions");
+    var cancel = el("button", "btn secondary", "Cancel"); cancel.type = "button";
+    cancel.addEventListener("click", closeDialog);
+    var send = el("button", "btn primary", "Send request"); send.type = "button";
+    send.addEventListener("click", function () { showConfirmation(x, chosen); });
+    actions.appendChild(cancel); actions.appendChild(send);
+    dlgBody.appendChild(actions);
+
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+
+  function showConfirmation(x, iso) {
+    dlgBody.textContent = "";
+    var title = el("h2", null, "Demo only: request not sent");
+    title.id = "req-title"; title.tabIndex = -1;
+    dlgBody.appendChild(title);
+    dlgBody.appendChild(el("p", "demo-note", "Nothing was sent. No email, invitation or calendar entry was created."));
+    dlgBody.appendChild(el("p", null, "In the real product, " + x.name + " would receive your request" + (iso ? " for " + fmtSlot(iso) : " without a fixed time") + " and could accept or decline it."));
+    var actions = el("div", "dlg-actions");
+    var close = el("button", "btn primary", "Close"); close.type = "button";
+    close.addEventListener("click", closeDialog);
+    actions.appendChild(close);
+    dlgBody.appendChild(actions);
+    title.focus();
+  }
+
+>>>>>>> 573f3a2f75dbacebe22a304d04ddf5e5607c7e93
   // Ranked matches after the top 3, behind "See more"
   function renderMore(rest) {
     if (!rest.length) return;
