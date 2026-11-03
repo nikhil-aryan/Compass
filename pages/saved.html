@@ -177,6 +177,11 @@
       pr.appendChild(ul);
       card.appendChild(pr);
     }
+    if (p.email) {
+      var mail = el("a", "btn-link", "Email " + p.full_name.split(" ")[0]);
+      mail.href = "mailto:" + p.email;
+      card.appendChild(mail);
+    }
     return card;
   }
 
